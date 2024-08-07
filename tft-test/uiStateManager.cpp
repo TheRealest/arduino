@@ -13,7 +13,6 @@ void UIStateManager::start() {
   rotaryEncoderA.start();
   rotaryEncoderB.start();
   screen.start();
-  drawEntireScreen();
   currentState->enter();
 }
 
@@ -34,16 +33,5 @@ void UIStateManager::update() {
   }
   if (switchStateChangeB != 0) {
     currentState->handleEncoderBSwitchStateChange(switchStateChangeB);
-  }
-}
-
-void UIStateManager::drawEntireScreen() {
-  for (uint8_t i = 0; i < 8; i++) {
-    screen.testHexPair(
-        UI_INITIAL_OFFSET,
-        UI_INITIAL_OFFSET + (UI_HEXPAIR_Y_OFFSET * i),
-        dataState.values[i],
-        false
-        );
   }
 }

@@ -1,7 +1,9 @@
 #include "mainUiState.h"
 
 void MainUIState::enter() {
-  drawValue(highlightedRow, true);
+  for (uint8_t i = 0; i < 8; i++) {
+    drawValue(i, (i == highlightedRow));
+  }
 }
 
 void MainUIState::handleEncoderARotaryStateChange(int8_t change) {

@@ -27,8 +27,6 @@ class UIStateManager {
     Screen screen;
     DataState dataState;
     UIState* currentState;
-
-    void drawEntireScreen();
 };
 
 #endif
