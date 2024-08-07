@@ -4,6 +4,7 @@
 #include "mcp23017.h"
 #include "rotaryEncoder.h"
 #include "screen.h"
+#include "dataState.h"
 
 #include "uiState/uiState.h"
 
@@ -24,6 +25,7 @@ class UIStateManager {
     RotaryEncoder rotaryEncoderA;
     RotaryEncoder rotaryEncoderB;
     Screen screen;
+    DataState dataState;
     UIState* currentState;
 
     void drawEntireScreen();

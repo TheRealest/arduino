@@ -6,7 +6,7 @@ UIStateManager::UIStateManager(MCP23017& mcp) :
   rotaryEncoderA(mcp, BANK_A, 6, 7, 5),
   rotaryEncoderB(mcp, BANK_A, 3, 4, 2),
   screen() {
-    currentState = new MainUIState();
+    currentState = new MainUIState(dataState, screen);
   }
 
 void UIStateManager::start() {
@@ -14,6 +14,7 @@ void UIStateManager::start() {
   rotaryEncoderB.start();
   screen.start();
   drawEntireScreen();
+  currentState->enter();
 }
 
 void UIStateManager::update() {
@@ -34,12 +35,6 @@ void UIStateManager::update() {
   if (switchStateChangeB != 0) {
     currentState->handleEncoderBSwitchStateChange(switchStateChangeB);
   }
-  if (rotaryStateChangeA != 0 ||
-      switchStateChangeA != 0 ||
-      rotaryStateChangeB != 0 ||
-      switchStateChangeB != 0) {
-    currentState->updateScreen(screen);
-  }
 }
 
 void UIStateManager::drawEntireScreen() {
@@ -47,7 +42,8 @@ void UIStateManager::drawEntireScreen() {
     screen.testHexPair(
         UI_INITIAL_OFFSET,
         UI_INITIAL_OFFSET + (UI_HEXPAIR_Y_OFFSET * i),
-        0
+        dataState.values[i],
+        false
         );
   }
 }

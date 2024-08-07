@@ -6,16 +6,18 @@
 
 class MainUIState : public UIState {
   public:
-    MainUIState() : UIState() {};
+    MainUIState(DataState& dataState, Screen& screen) : UIState(dataState, screen) {}
+
+    void enter();
 
     void handleEncoderARotaryStateChange(int8_t change);
     void handleEncoderASwitchStateChange(int8_t change);
     void handleEncoderBRotaryStateChange(int8_t change) {}
     void handleEncoderBSwitchStateChange(int8_t change) {}
 
-    void updateScreen(Screen& screen);
-
   private:
+    void drawValue(uint8_t index, bool highlighted);
+
     int8_t highlightedRow = 0;
 };
 
