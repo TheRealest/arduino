@@ -3,7 +3,7 @@
 
 #include "mcp23017.h"
 
-#define ROTARY_ENCODER_SWITCH_THROTTLE_MS (500)
+#define ROTARY_ENCODER_SWITCH_THROTTLE_MS (100)
 
 class RotaryEncoder {
   public:
@@ -31,7 +31,7 @@ class RotaryEncoder {
     String direction = "none";
 
     uint8_t switchValue = 1;
-    uint8_t switchThrottleTimer = 0;
+    uint32_t switchThrottleTimer = 0;
 };
 
 #endif

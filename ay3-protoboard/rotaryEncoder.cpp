@@ -52,15 +52,17 @@ uint8_t RotaryEncoder::getSwitchStateChange() {
 
   uint8_t result = 0;
   if (switchValue != newswitchValue) {
-    if (millis() - switchThrottleTimer < ROTARY_ENCODER_SWITCH_THROTTLE_MS) {
+    if ((millis() - switchThrottleTimer) < ROTARY_ENCODER_SWITCH_THROTTLE_MS) {
       switchThrottleTimer = millis();
       switchValue = newswitchValue;
       return 0;
     }
     if (newswitchValue == 0) {
       result = 1;
+      switchThrottleTimer = millis();
     } else {
       result = -1;
+      switchThrottleTimer = millis();
     }
   }
 
