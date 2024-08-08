@@ -10,12 +10,17 @@
 #define TFT_DC 7
 #define TFT_RST 6
 
+#define UI_INITIAL_OFFSET 8
+#define UI_HEXPAIR_X_OFFSET 34
+#define UI_HEXPAIR_Y_OFFSET 26
+
 class Screen {
   public:
     Screen() {}
 
     void start();
-    void testHexPair(uint16_t x, uint16_t y, uint8_t value, bool highlight);
+    void drawHexRow(uint8_t row, uint8_t values[6], bool highlighted);
+    void drawHexPair(uint16_t row, uint16_t index, uint8_t value, bool highlighted);
 
   private:
     const Adafruit_HX8357 tft = Adafruit_HX8357(TFT_CS, TFT_DC, TFT_RST);

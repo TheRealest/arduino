@@ -1,12 +1,12 @@
 #include "mcp23017.h"
 #include "rotaryEncoder.h"
-#include "uiStateManager.h"
+#include "stateManager.h"
 
 #define RESET_PIN (12)
 #define CLOCK_PIN (9)
 
 MCP23017 mcp(0);
-UIStateManager uiStateManager(mcp);
+StateManager stateManager(mcp);
 
 void resetChips() {
   pinMode(RESET_PIN, OUTPUT);
@@ -34,9 +34,9 @@ void setup() {
   enableClock();
 
   mcp.start();
-  uiStateManager.start();
+  stateManager.start();
 }
 
 void loop() {
-  uiStateManager.update();
+  stateManager.update();
 }
