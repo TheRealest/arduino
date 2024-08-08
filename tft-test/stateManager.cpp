@@ -1,6 +1,7 @@
 #include "stateManager.h"
 #include "uiState/mainUiState.cpp"
 #include "uiState/rowSelectedUiState.cpp"
+#include "uiState/valueSelectedUiState.cpp"
 
 StateManager::StateManager(MCP23017& mcp) :
   mcp(mcp),
