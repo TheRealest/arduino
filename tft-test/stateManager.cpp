@@ -1,22 +1,23 @@
-#include "uiStateManager.h"
+#include "stateManager.h"
 #include "uiState/mainUiState.cpp"
+#include "uiState/rowSelectedUiState.cpp"
 
-UIStateManager::UIStateManager(MCP23017& mcp) :
+StateManager::StateManager(MCP23017& mcp) :
   mcp(mcp),
   rotaryEncoderA(mcp, BANK_A, 6, 7, 5),
   rotaryEncoderB(mcp, BANK_A, 3, 4, 2),
   screen() {
-    currentState = new MainUIState(dataState, screen);
+    currentState = new MainUIState(*this, dataState, screen);
   }
 
-void UIStateManager::start() {
+void StateManager::start() {
   rotaryEncoderA.start();
   rotaryEncoderB.start();
   screen.start();
   currentState->enter();
 }
 
-void UIStateManager::update() {
+void StateManager::update() {
   int8_t rotaryStateChangeA = rotaryEncoderA.getRotaryStateChange();
   int8_t switchStateChangeA = rotaryEncoderA.getSwitchStateChange();
   int8_t rotaryStateChangeB = rotaryEncoderB.getRotaryStateChange();
@@ -34,4 +35,13 @@ void UIStateManager::update() {
   if (switchStateChangeB != 0) {
     currentState->handleEncoderBSwitchStateChange(switchStateChangeB);
   }
+}
+
+void StateManager::transitionTo(UIState* newState) {
+  UIState* oldState = currentState;
+  oldState->exit();
+  newState->enter();
+
+  currentState = newState;
+  delete oldState;
 }

@@ -8,8 +8,14 @@ void Screen::start() {
   tft.setTextSize(2);
 }
 
-void Screen::testHexPair(uint16_t x, uint16_t y, uint8_t value, bool highlight) {
+    void drawHexRow(uint8_t row, uint8_t values[6], bool highlight);
+    void drawHexPair(uint16_t row, uint16_t index, uint8_t value, bool highlight);
+
+void Screen::drawHexPair(uint16_t row, uint16_t index, uint8_t value, bool highlight) {
   uint16_t backgroundColor;
+  uint16_t x = UI_INITIAL_OFFSET + (UI_HEXPAIR_X_OFFSET * index);
+  uint16_t y = UI_INITIAL_OFFSET + (UI_HEXPAIR_Y_OFFSET * row);
+
   if (highlight) {
     backgroundColor = HX8357_RED;
     tft.setTextColor(HX8357_BLACK);
