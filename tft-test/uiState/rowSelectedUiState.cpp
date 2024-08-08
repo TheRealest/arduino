@@ -9,11 +9,13 @@ void RowSelectedUIState::enter() {
 }
 
 void RowSelectedUIState::handleEncoderARotaryStateChange(int8_t change) {
-  int8_t newHighlightedValue = highlightedValue + change;
-  if (newHighlightedValue > 5) {
+  uint8_t newHighlightedValue;
+  if (highlightedValue == 5 && change == 1) {
     newHighlightedValue = 0;
-  } else if (newHighlightedValue < 0) {
+  } else if (highlightedValue == 0 && change == -1) {
     newHighlightedValue = 5;
+  } else {
+    newHighlightedValue = highlightedValue + change;
   }
 
   drawValue(highlightedValue, false);

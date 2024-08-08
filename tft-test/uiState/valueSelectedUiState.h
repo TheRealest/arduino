@@ -9,8 +9,11 @@ class ValueSelectedUIState : public UIState {
         StateManager& stateManager,
         DataState& dataState,
         Screen& screen,
-        int8_t selectedRow,
-        int8_t selectedValue) : UIState(stateManager, dataState, screen), selectedRow(selectedRow), selectedValue(selectedValue) {}
+        uint8_t selectedRow,
+        uint8_t selectedValue) :
+      UIState(stateManager, dataState, screen),
+      selectedRow(selectedRow),
+      selectedValue(selectedValue) {}
 
     void enter() {}
     void exit() {}
@@ -21,8 +24,8 @@ class ValueSelectedUIState : public UIState {
     void handleEncoderBSwitchStateChange(int8_t change);
 
   private:
-    int8_t selectedRow;
-    int8_t selectedValue;
+    uint8_t selectedRow;
+    uint8_t selectedValue;
 
     void drawValue();
 };

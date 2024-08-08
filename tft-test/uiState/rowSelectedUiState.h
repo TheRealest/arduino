@@ -5,7 +5,15 @@
 
 class RowSelectedUIState : public UIState {
   public:
-    RowSelectedUIState(StateManager& stateManager, DataState& dataState, Screen& screen, int8_t selectedRow, int8_t highlightedValue = 0) : UIState(stateManager, dataState, screen), selectedRow(selectedRow), highlightedValue(highlightedValue) {}
+    RowSelectedUIState(
+        StateManager& stateManager,
+        DataState& dataState,
+        Screen& screen,
+        uint8_t selectedRow,
+        uint8_t highlightedValue = 0) :
+      UIState(stateManager, dataState, screen),
+      selectedRow(selectedRow),
+      highlightedValue(highlightedValue) {}
 
     void enter();
     void exit() {}
@@ -16,8 +24,8 @@ class RowSelectedUIState : public UIState {
     void handleEncoderBSwitchStateChange(int8_t change);
 
   private:
-    int8_t selectedRow;
-    int8_t highlightedValue;
+    uint8_t selectedRow;
+    uint8_t highlightedValue;
 
     void drawValue(uint8_t valueIndex, bool highlighted);
 };

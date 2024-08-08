@@ -2,14 +2,18 @@
 #include "rowSelectedUiState.h"
 
 void ValueSelectedUIState::handleEncoderARotaryStateChange(int8_t change) {
-  int8_t newValue = dataState.rows[selectedRow].values[selectedValue] + change;
-  if (newValue < 0) {
-    newValue = 0x8F;
+  uint8_t oldValue = dataState.rows[selectedRow].values[selectedValue];
+  uint8_t newValue;
+  if (oldValue == 0xFF && change == 1) {
+    newValue = 0;
+  } else if (oldValue == 0 && change == -1) {
+    newValue = 0xFF;
+  } else {
+    newValue = oldValue + change;
   }
 
-  drawValue();
-
   dataState.rows[selectedRow].values[selectedValue] = newValue;
+  drawValue();
 }
 
 void ValueSelectedUIState::handleEncoderBSwitchStateChange(int8_t change) {
