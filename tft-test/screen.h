@@ -19,8 +19,8 @@ class Screen {
     Screen() {}
 
     void start();
-    void drawHexRow(uint8_t row, uint8_t values[6], bool highlight);
-    void drawHexPair(uint16_t row, uint16_t index, uint8_t value, bool highlight);
+    void drawHexRow(uint8_t row, uint8_t values[6], bool highlighted);
+    void drawHexPair(uint16_t row, uint16_t index, uint8_t value, bool highlighted);
 
   private:
     const Adafruit_HX8357 tft = Adafruit_HX8357(TFT_CS, TFT_DC, TFT_RST);

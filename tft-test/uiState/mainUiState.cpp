@@ -7,6 +7,10 @@ void MainUIState::enter() {
   }
 }
 
+void MainUIState::exit() {
+  drawRow(highlightedRow, false);
+}
+
 void MainUIState::handleEncoderARotaryStateChange(int8_t change) {
   int8_t newHighlightedRow = highlightedRow + change;
   if (newHighlightedRow > 7) {
@@ -28,9 +32,11 @@ void MainUIState::handleEncoderASwitchStateChange(int8_t change) {
 }
 
 void MainUIState::drawRow(uint8_t index, bool highlighted) {
-  for (uint8_t i = 0; i < 6; i++) {
-    drawValue(index, i, highlighted);
-  }
+  screen.drawHexRow(
+      index,
+      dataState.rows[index].values,
+      highlighted
+      );
 }
 
 
