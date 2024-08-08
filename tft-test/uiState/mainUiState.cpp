@@ -12,11 +12,13 @@ void MainUIState::exit() {
 }
 
 void MainUIState::handleEncoderARotaryStateChange(int8_t change) {
-  int8_t newHighlightedRow = highlightedRow + change;
-  if (newHighlightedRow > 7) {
+  uint8_t newHighlightedRow;
+  if (highlightedRow == 7 && change == 1) {
     newHighlightedRow = 0;
-  } else if (newHighlightedRow < 0) {
+  } else if (highlightedRow == 0 && change == -1) {
     newHighlightedRow = 7;
+  } else {
+    newHighlightedRow = highlightedRow + change;
   }
 
   drawRow(highlightedRow, false);

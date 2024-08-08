@@ -1,5 +1,6 @@
 #include "rowSelectedUiState.h"
 #include "mainUiState.h"
+#include "valueSelectedUiState.h"
 
 void RowSelectedUIState::enter() {
   for (uint8_t i = 0; i < 6; i++) {
@@ -8,11 +9,13 @@ void RowSelectedUIState::enter() {
 }
 
 void RowSelectedUIState::handleEncoderARotaryStateChange(int8_t change) {
-  int8_t newHighlightedValue = highlightedValue + change;
-  if (newHighlightedValue > 5) {
+  uint8_t newHighlightedValue;
+  if (highlightedValue == 5 && change == 1) {
     newHighlightedValue = 0;
-  } else if (newHighlightedValue < 0) {
+  } else if (highlightedValue == 0 && change == -1) {
     newHighlightedValue = 5;
+  } else {
+    newHighlightedValue = highlightedValue + change;
   }
 
   drawValue(highlightedValue, false);
@@ -23,8 +26,7 @@ void RowSelectedUIState::handleEncoderARotaryStateChange(int8_t change) {
 
 void RowSelectedUIState::handleEncoderASwitchStateChange(int8_t change) {
   if (change == 1) {
-    dataState.rows[selectedRow].values[highlightedValue]++;
-    drawValue(highlightedValue, true);
+    stateManager.transitionTo(new ValueSelectedUIState(stateManager, dataState, screen, selectedRow, highlightedValue));
   }
 }
 

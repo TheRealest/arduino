@@ -5,7 +5,13 @@
 
 class MainUIState : public UIState {
   public:
-    MainUIState(StateManager& stateManager, DataState& dataState, Screen& screen, int8_t highlightedRow = 0) : UIState(stateManager, dataState, screen), highlightedRow(highlightedRow) {}
+    MainUIState(
+        StateManager& stateManager,
+        DataState& dataState,
+        Screen& screen,
+        uint8_t highlightedRow = 0) :
+      UIState(stateManager, dataState, screen),
+      highlightedRow(highlightedRow) {}
 
     void enter();
     void exit();
@@ -19,7 +25,7 @@ class MainUIState : public UIState {
     void drawRow(uint8_t index, bool highlighted);
     void drawValue(uint8_t rowIndex, uint8_t valueIndex, bool highlighted);
 
-    int8_t highlightedRow;
+    uint8_t highlightedRow;
 };
 
 #endif

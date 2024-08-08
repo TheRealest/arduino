@@ -1,33 +1,33 @@
-#ifndef ROW_SELECTED_UI_STATE_H_
-#define ROW_SELECTED_UI_STATE_H_
+#ifndef VALUE_SELECTED_UI_STATE_H_
+#define VALUE_SELECTED_UI_STATE_H_
 
 #include "uiState.h"
 
-class RowSelectedUIState : public UIState {
+class ValueSelectedUIState : public UIState {
   public:
-    RowSelectedUIState(
+    ValueSelectedUIState(
         StateManager& stateManager,
         DataState& dataState,
         Screen& screen,
         uint8_t selectedRow,
-        uint8_t highlightedValue = 0) :
+        uint8_t selectedValue) :
       UIState(stateManager, dataState, screen),
       selectedRow(selectedRow),
-      highlightedValue(highlightedValue) {}
+      selectedValue(selectedValue) {}
 
-    void enter();
+    void enter() {}
     void exit() {}
 
     void handleEncoderARotaryStateChange(int8_t change);
-    void handleEncoderASwitchStateChange(int8_t change);
+    void handleEncoderASwitchStateChange(int8_t change) {}
     void handleEncoderBRotaryStateChange(int8_t change) {}
     void handleEncoderBSwitchStateChange(int8_t change);
 
   private:
     uint8_t selectedRow;
-    uint8_t highlightedValue;
+    uint8_t selectedValue;
 
-    void drawValue(uint8_t valueIndex, bool highlighted);
+    void drawValue();
 };
 
 #endif
